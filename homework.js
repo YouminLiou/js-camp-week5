@@ -57,7 +57,7 @@ const orders = [
  */
 function getProductById(products, productId) {
   // 請實作此函式
-  const findResult = products.find(
+  let findResult = products.find(
     (product) => product.id === productId
   )
   return findResult || null;
@@ -74,7 +74,7 @@ function getProductsByCategory(products, category) {
   if (category === '全部') {
     return products;
   }
-  const findCategory = products.filter(
+  let findCategory = products.filter(
     (product) => product.category ===  category
   )
   return findCategory;
@@ -88,7 +88,7 @@ function getProductsByCategory(products, category) {
  */
 function getDiscountRate(product) {
   // 請實作此函式
-  const discountRate = Math.round((product.price / product.origin_price) * 100) / 10;
+  let discountRate = Math.round((product.price / product.origin_price) * 100) / 10;
   return `${discountRate} 折`;
 }
 
@@ -99,7 +99,7 @@ function getDiscountRate(product) {
  */
 function getAllCategories(products) {
   // 請實作此函式
-  const allCategories = products.map((product) => product.category);
+  let allCategories = products.map((product) => product.category);
   return [...new Set(allCategories)];
 }
 
@@ -114,6 +114,10 @@ function getAllCategories(products) {
  */
 function calculateCartOriginalTotal(carts) {
   // 請實作此函式
+  let originalTotal = carts.reduce(
+    (total, cart) => total + cart.product.origin_price * cart.quantity, 0
+  );
+  return originalTotal;
 }
 
 /**
@@ -123,6 +127,10 @@ function calculateCartOriginalTotal(carts) {
  */
 function calculateCartTotal(carts) {
   // 請實作此函式
+  let cartTotal = carts.reduce(
+    (total, cart) => total + cart.product.price * cart.quantity, 0
+  );
+  return cartTotal;
 }
 
 /**
@@ -132,6 +140,8 @@ function calculateCartTotal(carts) {
  */
 function calculateSavings(carts) {
   // 請實作此函式
+  let savings = calculateCartOriginalTotal(carts) - calculateCartTotal(carts);
+  return savings;
 }
 
 /**
@@ -141,6 +151,10 @@ function calculateSavings(carts) {
  */
 function calculateCartItemCount(carts) {
   // 請實作此函式
+  let cartItemCount = carts.reduce(
+    (total, cart) => total + cart.quantity, 0
+  );
+  return cartItemCount;
 }
 
 /**
@@ -151,6 +165,8 @@ function calculateCartItemCount(carts) {
  */
 function isProductInCart(carts, productId) {
   // 請實作此函式
+  let productInCart = carts.some((cart) => cart.product.id === productId);
+  return productInCart;
 }
 
 // ========================================
