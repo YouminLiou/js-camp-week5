@@ -183,6 +183,28 @@ function isProductInCart(carts, productId) {
  */
 function addToCart(carts, product, quantity) {
   // 請實作此函式
+  let findProductInToCart = carts.findIndex((cart) => cart.product.id === product.id);
+  if(findProductInToCart ==! -1){
+    //合併數量
+    return carts.map((cart, index) => {
+      if(index === findProductInToCart){
+        return {
+          ...carts,
+          quantity : cart.quantity + quantity
+        }
+      }
+      return cart;
+    })
+  }
+  //不存在，新增一筆
+  let newCarts = {
+    id : `cart-${Date.now()}`,
+    product,
+    quantity
+  };
+  //回傳新的購物車陣列
+  return [...carts, newCarts];
+
 }
 
 /**
