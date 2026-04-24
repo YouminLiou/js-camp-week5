@@ -216,6 +216,20 @@ function addToCart(carts, product, quantity) {
  */
 function updateCartItemQuantity(carts, cartId, newQuantity) {
   // 請實作此函式
+  if(newQuantity <= 0){
+    return carts.filter((cart) => cart.id !== cartId);
+  }
+
+  return carts.map((cart) => {
+    if(cart.id === cartId){
+      //更新資料
+      return{
+        ...cart,
+        quantity : newQuantity
+      }
+      return cart;
+    }
+  })
 }
 
 /**
@@ -226,6 +240,7 @@ function updateCartItemQuantity(carts, cartId, newQuantity) {
  */
 function removeFromCart(carts, cartId) {
   // 請實作此函式
+  return carts.filter((cart) => cart.id !== cartId);
 }
 
 /**
@@ -234,6 +249,7 @@ function removeFromCart(carts, cartId) {
  */
 function clearCart() {
   // 請實作此函式
+  return [];
 }
 
 // ========================================
