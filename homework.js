@@ -226,9 +226,9 @@ function updateCartItemQuantity(carts, cartId, newQuantity) {
       return{
         ...cart,
         quantity : newQuantity
-      }else{
-        return cart;
-        }
+      }
+    }else{
+      return cart;
     }
   })
 }
